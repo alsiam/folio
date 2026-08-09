@@ -11,7 +11,7 @@ body {
   margin: 0;
   line-height: 1.5;
   font-size: 16px;
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-body), sans-serif;
   font-weight: 400;
 }
 ::-webkit-scrollbar {
@@ -43,7 +43,7 @@ body {
 input,
 textarea,
 select {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-body), sans-serif;
 }
 .section {
   background-color: #f2f2fc;
@@ -104,7 +104,7 @@ select {
 .section-title h2 {
   font-size: 40px;
   color: #302e4d;
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font-heading), sans-serif;
   font-weight: 700;
   margin: 0;
   position: relative;
@@ -153,7 +153,7 @@ select {
 }
 .btn {
   font-size: 16px;
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font-heading), sans-serif;
   font-weight: 500;
   padding: 12px 35px;
   color: #fff;
@@ -254,7 +254,7 @@ select {
 .aside .logo a {
   font-size: 40px;
   color: #302e4d;
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font-heading), sans-serif;
   font-weight: 700;
   display: inline-block;
   position: relative;
@@ -380,7 +380,7 @@ select {
 .home .intro h1 {
   font-size: 30px;
   color: #302e4d;
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font-heading), sans-serif;
   font-weight: 700;
   margin: 20px 0 5px;
 }

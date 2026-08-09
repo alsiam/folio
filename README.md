@@ -1,6 +1,6 @@
 # Readme Portfolio di Simone Guarnuccio
 
-![Portfolio Sceeen](/public/imgs/site-screen.png)
+Online su [simoneguarnuccio.vercel.app](https://simoneguarnuccio.vercel.app)
 
 ## Descrizione
 
