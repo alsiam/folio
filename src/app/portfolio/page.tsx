@@ -1,5 +1,13 @@
 import type { NextPage } from "next";
 import Image from "next/image";
+import { LuChevronRight } from "react-icons/lu";
+import { projects } from "@/content/projects";
+
+// La vecchia card è una schermata 14rem in object-fit:fill: mostra bene
+// uno screenshot reale, non il logo quadrato di RankPong. La vecchia
+// pagina sparisce comunque con l'app/portfolio/ in Tappa 7 — per ora
+// vediamo solo i progetti con un'immagine adatta a questa forma.
+const legacyProjects = projects.filter((p) => p.legacyImage);
 
 const Portfolio: NextPage = () => {
   return (
@@ -12,70 +20,39 @@ const Portfolio: NextPage = () => {
             </div>
           </div>
           <div className="row">
-            <div className="portfolio-filter padd-15">
-              {/* <button type="button" className="active" data-filter="all">
-                All
-              </button> */}
-              {/* <button type="button" data-filter="graphics-design">
-                Graphics Design
-              </button>
-              <button type="button" data-filter="web-design">
-                Web Design
-              </button>
-              <button type="button" data-filter="wordpress">
-                Wordpress
-              </button> */}
-            </div>
+            <div className="portfolio-filter padd-15" />
           </div>
           <div className="row">
-            {/* Portfolio Item */}
-            <div className="portfolio-item padd-15" data-category="cross-platform-app">
-              <div className="portfolio-item-inner shadow-dark">
-                <a href="https://vocaltrainer.netlify.app" target="_blank" rel="noopener noreferrer">
-                <div className="portfolio-img">
-                    <div style={{ position: 'relative', width: '100%', height: '14rem' }}>
-                      <Image
-                        src="/imgs/portfolio/VocalTrainer.jpeg"
-                        alt="VocalTrainerApp"
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                    </div>
-                  </div>
-                  <div className="portfolio-info">
-                      <h4>Vocal Trainer</h4>
-                      <div className="icon">
-                        <i className="fa fa-chevron-right"></i>
+            {legacyProjects.map((project) => (
+              <div key={project.slug} className="portfolio-item padd-15">
+                <div className="portfolio-item-inner shadow-dark">
+                  <a href={project.href} target="_blank" rel="noopener noreferrer">
+                    <div className="portfolio-img">
+                      <div
+                        style={{
+                          position: "relative",
+                          width: "100%",
+                          height: "14rem",
+                        }}
+                      >
+                        <Image
+                          src={project.legacyImage!.src}
+                          alt={project.legacyImage!.alt}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-            {/* Portfolio Item End */}
-            {/* Portfolio Item */}
-            <div className="portfolio-item padd-15" data-category="cross-platform-app">
-              <div className="portfolio-item-inner shadow-dark">
-                <a href="https://sabaothctdocs.netlify.app" target="_blank" rel="noopener noreferrer">
-                  <div className="portfolio-img">
-                    <div style={{ position: 'relative', width: '100%', height: '14rem' }}>
-                      <Image
-                        src="/imgs/portfolio/SabaothCTDocs.jpeg"
-                        alt="SabaothCTDocs"
-                        layout="fill"
-                        objectFit="cover"
-                      />
                     </div>
-                  </div>
-                  <div className="portfolio-info">
-                      <h4>Documentation APS Sabaoth Catania</h4>
+                    <div className="portfolio-info">
+                      <h4>{project.title}</h4>
                       <div className="icon">
-                        <i className="fa fa-chevron-right"></i>
+                        <LuChevronRight aria-hidden />
                       </div>
-                  </div>
-                </a>
+                    </div>
+                  </a>
+                </div>
               </div>
-            </div>
-            {/* Portfolio Item End */}
+            ))}
           </div>
         </div>
       </section>

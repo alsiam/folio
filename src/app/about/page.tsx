@@ -1,6 +1,10 @@
 import type { NextPage } from "next";
-import Tecnologies from "../../components/technologies"
 import Link from "next/link";
+import { LuCalendar } from "react-icons/lu";
+import Tecnologies from "../../components/technologies";
+import { jobs } from "@/content/experience";
+import { education } from "@/content/education";
+import { formatJobPeriod } from "@/lib/format";
 
 const About: NextPage = () => {
   return (
@@ -40,35 +44,30 @@ const About: NextPage = () => {
                   <div className="row">
                     <div className="timeline-box padd-15">
                       <div className="timeline shadow-dark">
-                        {/* Timeline Item */}
-                        <div className="timeline-item">
-                          <div className="circle-dot" />
-                          <h6 className="timeline-date">
-                            <i className="fa fa-calendar" /> July 2022 - Present
-                          </h6>
-                          <h4 className="timeline-title">Front-End Developer</h4>
-                          <p className="timeline-text">
-                          Creationdose, Catania, Italy <br/>
-                          • Maintainance Design Systems <br/>
-                          • Maintenance <Link href={'https://vidoser.com/it/'}>Vidoser App</Link> and all the libraries used in the project <br/>
-                          </p>
-                        </div>
-                        {/* Timeline Item end */}
-                        {/* Timeline Item */}
-                        <div className="timeline-item">
-                          <div className="circle-dot" />
-                          <h6 className="timeline-date">
-                            <i className="fa fa-calendar" /> October 2017 - Present
-                          </h6>
-                          <h4 className="timeline-title">Technical Smartphone and Computer Technician</h4>
-                          <p className="timeline-text">
-                            SOSPHONE Catania, Italy <br/>
-                            • Repair smartphones Huawei, Apple, Samsung, Xiaomi, Oppo, LG  <br/>
-                            • Hardware and Software Assistance for PC <br/>
-                            • Sales Representative
-                          </p>
-                        </div>
-                        {/* Timeline Item end */}
+                        {jobs.map((job) => (
+                          <div key={job.id} className="timeline-item">
+                            <div className="circle-dot" />
+                            <h6 className="timeline-date">
+                              <LuCalendar size={14} aria-hidden />{" "}
+                              {formatJobPeriod(job.start, job.end)}
+                            </h6>
+                            <h4 className="timeline-title">{job.role}</h4>
+                            <p className="timeline-text">
+                              {job.company}, {job.location} <br />
+                              {job.bullets.map((bullet) => (
+                                <span key={bullet}>
+                                  • {bullet} <br />
+                                </span>
+                              ))}
+                              {job.links?.map((link, i) => (
+                                <span key={link.href}>
+                                  {i > 0 && " · "}
+                                  <Link href={link.href}>{link.label}</Link>
+                                </span>
+                              ))}
+                            </p>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -77,56 +76,33 @@ const About: NextPage = () => {
                   <h3 className="title">Education and Training</h3>  <div className="row">
                     <div className="timeline-box padd-15">
                       <div className="timeline shadow-dark">
-                        {/* Timeline Item */}
-                        <div className="timeline-item">
-                          <div className="circle-dot" />
-                          <h6 className="timeline-date">
-                            <i className="fa fa-calendar" /> April 2022  </h6>
-                          <h4 className="timeline-title">
-                            Responsive Web Design Course
-                          </h4>  <p className="timeline-text">
-                            FreeCodeCamp.org
-                          </p>
-                        </div>
-                        {/* Timeline Item end */}
-                        {/* Timeline Item */}
-                        <div className="timeline-item">
-                          <div className="circle-dot" />
-                          <h6 className="timeline-date">
-                            <i className="fa fa-calendar" /> 2014-2019  </h6>
-                          <h4 className="timeline-title">
-                            Bachelor&apos;s Degree in Computer Science
-                          </h4>  <p className="timeline-text">
-                            University of Catania, Department of Computer Science, Italy  <br/>
-                            Final grade: 91/110
-                          </p>
-                        </div>
-                        {/* Timeline Item end */}
-                        {/* Timeline Item */}
-                        <div className="timeline-item">
-                          <div className="circle-dot" />
-                          <h6 className="timeline-date">
-                            <i className="fa fa-calendar" /> March 2018 - July 2018  </h6>
-                          <h4 className="timeline-title">
-                            Training Internship as Entertainment Industry Operator
-                          </h4>  <p className="timeline-text">
-                            Note International Accademy, Associazione meridies sc, Catania (Italy)  <br/>
-                            - Assembly and disassembly of audio and lighting services  - Assistant to the audio director (studio and live sessions)  </p>
-                        </div>
-                        {/* Timeline Item end */}
-                        {/* Timeline Item */}
-                        <div className="timeline-item">
-                          <div className="circle-dot" />
-                          <h6 className="timeline-date">
-                            <i className="fa fa-calendar" /> 2009-2014
-                          </h6>
-                          <h4 className="timeline-title">Technical Electronics Diploma</h4>
-                          <p className="timeline-text">
-                            {`I.P.I.A. "G. Marconi", Vittoria (RG), Italia`}<br/>
-                            Final grade: 87/100
-                          </p>
-                        </div>
-                        {/* Timeline Item end */}
+                        {education.map((entry) => (
+                          <div key={entry.id} className="timeline-item">
+                            <div className="circle-dot" />
+                            <h6 className="timeline-date">
+                              <LuCalendar size={14} aria-hidden /> {entry.date}
+                            </h6>
+                            <h4 className="timeline-title">
+                              {entry.qualification}
+                            </h4>
+                            <p className="timeline-text">
+                              {entry.institutionHref ? (
+                                <Link href={entry.institutionHref}>
+                                  {entry.institution}
+                                </Link>
+                              ) : (
+                                entry.institution
+                              )}
+                              <br />
+                              {entry.bullets?.map((bullet) => (
+                                <span key={bullet}>
+                                  - {bullet} <br />
+                                </span>
+                              ))}
+                              {entry.grade && <>Final grade: {entry.grade}</>}
+                            </p>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>

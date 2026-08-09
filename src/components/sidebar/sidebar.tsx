@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { LuUser, LuBriefcase } from "react-icons/lu";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -38,7 +39,7 @@ const Sidebar = () => {
               href="/about"
               className={`${pathUrl == "/about" && "active"}`}
             >
-              <i className="fa fa-user" /> About
+              <LuUser size={16} aria-hidden /> About
             </Link>
           </li>
           {/* <li onClick={handleClose}>
@@ -54,7 +55,7 @@ const Sidebar = () => {
               href="/portfolio"
               className={`${pathUrl == "/portfolio" && "active"}`}
             >
-              <i className="fa fa-briefcase" /> Portfolio
+              <LuBriefcase size={16} aria-hidden /> Portfolio
             </Link>
           </li>
           {/* <li onClick={handleClose}>

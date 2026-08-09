@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { LuMapPin, LuPhone, LuMail } from "react-icons/lu";
 
 const Contact: NextPage = () => {
   return (
@@ -14,7 +15,7 @@ const Contact: NextPage = () => {
             {/* contact-info-item */}
             <div className="contact-info-item padd-15">
               <div className="icon">
-                <i className="fa fa-map-marker" />
+                <LuMapPin aria-hidden />
               </div>
               <h4>Address</h4>
               <p>Your Address, City</p>
@@ -23,7 +24,7 @@ const Contact: NextPage = () => {
             {/* contact-info-item */}
             <div className="contact-info-item padd-15">
               <div className="icon">
-                <i className="fa fa-phone" />
+                <LuPhone aria-hidden />
               </div>
               <h4>Call Us On</h4>
               <p>+99 **********</p>
@@ -32,7 +33,7 @@ const Contact: NextPage = () => {
             {/* contact-info-item */}
             <div className="contact-info-item padd-15">
               <div className="icon">
-                <i className="fa fa-envelope" />
+                <LuMail aria-hidden />
               </div>
               <h4>Email</h4>
               <p>your@email.com</p>
