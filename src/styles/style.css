@@ -1,7 +1,5 @@
 @import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 /* General style 
 ======================================================== */
 html {

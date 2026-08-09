@@ -27,7 +27,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${rubik.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${rubik.variable}`}
+      suppressHydrationWarning
+    >
       <body className={inter.className}>
         <Providers>
           <ThemeSwitch />

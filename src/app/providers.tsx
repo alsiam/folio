@@ -5,7 +5,13 @@ import NextTopLoader from "nextjs-toploader";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ThemeProvider enableSystem>
+    <ThemeProvider
+      attribute="data-theme"
+      defaultTheme="system"
+      enableSystem
+      enableColorScheme
+      storageKey="gs-theme"
+    >
       <NextTopLoader />
       {children}
     </ThemeProvider>
