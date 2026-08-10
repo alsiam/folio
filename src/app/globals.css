@@ -156,38 +156,60 @@
     padding-bottom: 0.125rem;
   }
 
-  .hero-thread {
+  /* Filo col gradiente Vidoser: sotto la hero e come confine di altre
+     sezioni, dove serve un separatore che non sia il solito hairline. */
+  .vidoser-thread {
+    position: relative;
     background-image: var(--vidoser-gradient);
     background-size: 200% 100%;
     animation: vidoser-thread-drift 18s linear infinite;
   }
 
+  /* Bagliore: una copia sfocata della stessa striscia, non un box-shadow —
+     un'ombra non può portare un gradiente a tre tinte. Stessa animazione,
+     così resta agganciata 1:1 al filo netto sopra. */
+  .vidoser-thread::after {
+    content: "";
+    position: absolute;
+    inset: -5px 0;
+    background-image: var(--vidoser-gradient);
+    background-size: 200% 100%;
+    animation: vidoser-thread-drift 18s linear infinite;
+    filter: blur(6px);
+    opacity: 0.6;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .hero-thread {
+    .vidoser-thread,
+    .vidoser-thread::after {
       animation: none;
     }
   }
 
   /* Anello, non border/outline: nessuno dei due accetta un gradiente.
-     Un cerchio su ::before mascherato in xor, cosi resta solo l'anello. */
+     Un cerchio su ::before mascherato in xor, cosi resta solo l'anello.
+     Terzo uso (deciso a voce) del gradiente Vidoser, oltre ai due canonici
+     dell'hero: qui l'interazione in hover non cambia colore (un gradiente
+     non ha una versione "più scura") ma allarga l'anello e ne alza l'opacità. */
   .about-photo::before {
     content: "";
     position: absolute;
     inset: -0.625rem;
     border-radius: 50%;
     padding: 2px;
-    background: var(--color-accent-line);
+    background: var(--vidoser-gradient);
+    opacity: 0.85;
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask-composite: exclude;
     -webkit-mask-composite: xor;
     transition:
       inset 200ms ease-out,
-      background-color 200ms ease-out;
+      opacity 200ms ease-out;
   }
 
   .about-photo:hover::before {
     inset: -1.125rem;
-    background: var(--color-accent);
+    opacity: 1;
   }
 
   /* Marquee CSS-only dello Stack, migrato da style.css (Tappa 4) col

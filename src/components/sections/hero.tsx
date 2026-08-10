@@ -46,7 +46,7 @@ export function Hero() {
 
       {/* Unica animazione perpetua del sito: filo col gradiente Vidoser
           che segna il confine con la sezione dopo, invece di una freccia. */}
-      <div aria-hidden className="hero-thread absolute inset-x-0 bottom-0 h-px" />
+      <div aria-hidden className="vidoser-thread absolute inset-x-0 bottom-0 h-px" />
     </section>
   );
 }

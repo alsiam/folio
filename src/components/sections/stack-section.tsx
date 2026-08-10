@@ -7,8 +7,9 @@ export function StackSection() {
     <section
       id="stack"
       aria-labelledby="stack-heading"
-      className="scroll-mt-20 border-t border-line py-20 sm:py-28"
+      className="relative scroll-mt-20 py-20 sm:py-28"
     >
+      <div aria-hidden className="vidoser-thread absolute inset-x-0 top-0 h-px" />
       <Container>
         <SectionHeading id="stack" eyebrow="Toolbox" title="Tools I reach for" />
       </Container>

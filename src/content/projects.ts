@@ -24,7 +24,7 @@ export const projects: readonly Project[] = [
     summary:
       "A training app for singers: breathing exercises, guided vocalises and a piano reference, on web, iOS and Android from one codebase. Started in 2022 and still shipping.",
     role: "Design & build",
-    stack: ["React Native", "Expo", "TypeScript", "Netlify"],
+    stack: ["React Native", "Expo", "Gluestack UI", "TypeScript", "Netlify"],
     href: "https://vocaltrainer.netlify.app",
     repo: "https://github.com/grnsmn/VocalTrainer",
     image: {

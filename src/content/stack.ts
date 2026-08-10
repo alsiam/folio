@@ -18,6 +18,9 @@ import {
   SiNetlify,
   SiVercel,
 } from "react-icons/si";
+// Nessuna icona di brand per NativeWind in Simple Icons: LuWind è il
+// riferimento visivo più vicino disponibile, non un logo ufficiale.
+import { LuWind } from "react-icons/lu";
 import type { StackItem } from "./types";
 
 // Verificato su github.com/grnsmn (profilo, README, singoli repo). React
@@ -32,6 +35,7 @@ export const stack: readonly StackItem[] = [
   { name: "Expo", icon: SiExpo },
   { name: "Vite", icon: SiVite },
   { name: "Tailwind", icon: SiTailwindcss },
+  { name: "NativeWind", icon: LuWind },
   { name: "Redux", icon: SiRedux },
   { name: "Supabase", icon: SiSupabase },
   { name: "Firebase", icon: SiFirebase },

@@ -4,21 +4,21 @@ import { SectionHeading } from "@/components/ui/section-heading";
 
 export function AboutSection() {
   return (
-    <Section id="about" noTopBorder>
-      <SectionHeading id="about" title="About" />
+    <Section id='about' noTopBorder>
+      <SectionHeading id='about' title='About' />
 
-      <div className="grid gap-10 sm:grid-cols-[auto_1fr] sm:items-start sm:gap-12">
-        <div className="about-photo relative mx-auto size-48 shrink-0 rounded-full sm:mx-0 sm:size-56">
+      <div className='grid gap-10 sm:grid-cols-[auto_1fr] sm:items-start sm:gap-12'>
+        <div className='about-photo relative mx-auto size-48 shrink-0 rounded-full sm:mx-0 sm:size-56'>
           <Image
-            src="/imgs/GS-Photo.webp"
-            alt="Simone Guarnuccio"
+            src='/imgs/GS-Photo.webp'
+            alt='Simone Guarnuccio'
             fill
-            sizes="224px"
-            className="rounded-full object-cover"
+            sizes='224px'
+            className='rounded-full object-cover'
           />
         </div>
 
-        <div className="space-y-4 text-ink-muted">
+        <div className='space-y-4 text-ink-muted'>
           <p>
             I&apos;m a frontend developer based in Catania, Italy — I move
             between web and mobile without treating either as the exception.
@@ -28,10 +28,9 @@ export function AboutSection() {
           </p>
           <p>
             At Creationdose I maintain Vidoser&apos;s design system, built on
-            Gluestack UI so the same components hold up on both the creator
-            app and the web platform behind it — a constraint that&apos;s
-            taught me more about primitives than any single-platform project
-            would have.
+            NativeWind for the creator app and shared across the web platform —
+            a constraint that&apos;s taught me more about primitives than any
+            single-platform project would have.
           </p>
         </div>
       </div>
