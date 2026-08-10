@@ -48,6 +48,8 @@ export const projects: readonly Project[] = [
     image: {
       src: "/imgs/work/sabaoth-docs.webp",
       alt: "Sabaoth Church wordmark",
+      fit: "contain",
+      invertInDark: true,
     },
     legacyImage: {
       src: "/imgs/portfolio/SabaothCTDocs.jpeg",

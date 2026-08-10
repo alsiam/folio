@@ -35,6 +35,11 @@
      perché siano due typeface diversi come Rubik/Montserrat prima. */
   --font-heading: var(--font-geist-sans);
   --font-body: var(--font-geist-sans);
+
+  /* Il wordmark Sabaoth è un PNG monocromatico pensato per fondo chiaro:
+     invert(0) lo lascia com'è, invert(1) lo capovolge per il tema scuro.
+     Un numero, non un booleano, perché filter:invert() lo vuole così. */
+  --mark-invert: 0;
 }
 
 [data-theme="dark"] {
@@ -56,6 +61,23 @@
   --p-accent-line: #312e81;
   --p-accent-ink: #09090b;
   --p-ring: #818cf8;
+
+  --mark-invert: 1;
+}
+
+/* Gradiente brand di Vidoser (azienda per cui lavoro, non il design system
+   del sito): unica eccezione alla regola "nessun colore fuori dai token".
+   Fuori da @theme di proposito, così non diventa un'utility riusabile —
+   vive solo nelle due regole sotto che lo consumano. Fisso in entrambi i
+   temi: non è un colore del sistema che debba cambiare con [data-theme]. */
+:root {
+  --vidoser-gradient: linear-gradient(90deg, #ff008a, #9008ff, #00fbff);
+}
+
+@keyframes vidoser-thread-drift {
+  to {
+    background-position: -200% 0;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────
@@ -117,5 +139,54 @@
   a {
     color: inherit;
     text-decoration: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   Le due sole regole che consumano il gradiente Vidoser, più l'anello
+   della foto in About — nessuna delle tre è un'utility riusabile, quindi
+   vivono qui come classi con nome invece che in @theme.
+   ───────────────────────────────────────────────────────── */
+@layer components {
+  .vidoser-underline {
+    background-image: var(--vidoser-gradient);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 2px;
+    padding-bottom: 0.125rem;
+  }
+
+  .hero-thread {
+    background-image: var(--vidoser-gradient);
+    background-size: 200% 100%;
+    animation: vidoser-thread-drift 18s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-thread {
+      animation: none;
+    }
+  }
+
+  /* Anello, non border/outline: nessuno dei due accetta un gradiente.
+     Un cerchio su ::before mascherato in xor, cosi resta solo l'anello. */
+  .about-photo::before {
+    content: "";
+    position: absolute;
+    inset: -0.625rem;
+    border-radius: 50%;
+    padding: 2px;
+    background: var(--color-accent-line);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    transition:
+      inset 200ms ease-out,
+      background-color 200ms ease-out;
+  }
+
+  .about-photo:hover::before {
+    inset: -1.125rem;
+    background: var(--color-accent);
   }
 }

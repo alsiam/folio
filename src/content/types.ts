@@ -29,6 +29,12 @@ export type Project = {
   image: {
     src: string;
     alt: string;
+    /** "contain" per i wordmark (hanno bisogno di margine, non di riempire
+     * il quadrato): default "cover" per le icone quadrate vere e proprie. */
+    fit?: "cover" | "contain";
+    /** true per i marchi monocromatici pensati per fondo chiaro, che in
+     * tema scuro vanno capovolti via --mark-invert. */
+    invertInDark?: boolean;
   };
   /** Solo per la vecchia /portfolio (sparisce con lei in Tappa 7): uno
    * screenshot 14rem che il markup attuale sa mostrare bene. RankPong
