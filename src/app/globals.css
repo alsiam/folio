@@ -91,24 +91,31 @@
     Consolas, monospace;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+/* @layer base: senza, queste regole restano "unlayered" e per lo spec dei
+   CSS Cascade Layers un rule unlayered batte SEMPRE una qualsiasi utility
+   Tailwind (che vive in @layer utilities), a prescindere da specificità o
+   ordine — es. un a{color:inherit} qui fuori avrebbe reso impossibile
+   colorare un <a> con una classe come text-ink-muted ovunque nel sito. */
+@layer base {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
 
-body {
-  background: var(--color-canvas);
-  color: var(--color-ink);
-}
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }

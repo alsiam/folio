@@ -8,8 +8,7 @@ import { formatJobPeriod } from "@/lib/format";
 
 const About: NextPage = () => {
   return (
-    <main>
-      <section className="about section" id="about">
+    <section className="about section" id="about">
         <div className="container">
           <div className="row">
             <div className="section-title padd-15">
@@ -113,7 +112,6 @@ const About: NextPage = () => {
           </div>
         </div>
       </section>
-    </main>
   );
 };
 

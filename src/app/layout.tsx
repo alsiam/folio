@@ -4,10 +4,10 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import "../styles/style.css";
 import "../styles/blue.css";
-import "../styles/theme.css";
-import Sidebar from "@/components/sidebar/sidebar";
+import { SkipLink } from "@/components/layout/skip-link";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
 import Providers from "./providers";
-import ThemeSwitch from "@/components/panel/ThemeSwitch";
 
 // Il CSS del template chiedeva "Rubik" sugli heading e "Montserrat" sul body
 // senza che nessuno dei due venisse mai caricato: ogni titolo cadeva sul sans
@@ -38,9 +38,10 @@ export default function RootLayout({
     >
       <body>
         <Providers>
-          <ThemeSwitch />
-          <Sidebar />
-          {children}
+          <SkipLink />
+          <SiteHeader />
+          <main id="main">{children}</main>
+          <SiteFooter />
         </Providers>
         <Analytics />
       </body>

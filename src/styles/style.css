@@ -1,92 +1,67 @@
-@import "tailwindcss";
-/* General style 
+/* Tailwind si importa una sola volta, da globals.css (che viene importato
+   per primo in layout.tsx). Un secondo @import qui duplicava l'intero
+   set di utility, e la copia duplicata di .hidden{display:none} finiva
+   dopo la prima copia di .md\:flex{display:flex} nel cascade — rompendo
+   silenziosamente ogni combinazione hidden+responsive del progetto. */
+
+/* General style
 ======================================================== */
-html {
-  scroll-behavior: smooth;
-}
-body {
-  margin: 0;
-  line-height: 1.5;
-  font-size: 16px;
-  font-family: var(--font-body), sans-serif;
-  font-weight: 400;
-}
-::-webkit-scrollbar {
-  width: 10px;
-}
+/* @layer base: stesso motivo del blocco analogo in globals.css. Il
+   selettore universale * qui sotto azzerava margin/padding/outline in
+   modo "unlayered" — cioè vincente su QUALSIASI utility Tailwind
+   (px-5, mx-auto, focus ring...) applicata a un elemento qualsiasi,
+   nuovo o vecchio, indipendentemente da specificità o ordine. */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    line-height: 1.5;
+    font-size: 16px;
+    font-family: var(--font-body), sans-serif;
+    font-weight: 400;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #bdbdbd00;
-}
+  ::-webkit-scrollbar-thumb {
+    background: #bdbdbd00;
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+  input,
+  textarea,
+  select {
+    font-family: var(--font-body), sans-serif;
+  }
 }
-* {
-  margin: 0;
-  padding: 0;
-  outline: none;
-  text-decoration: none;
-  box-sizing: border-box;
-}
-::before,
-::after {
-  box-sizing: border-box;
-}
-input,
-textarea,
-select {
-  font-family: var(--font-body), sans-serif;
-}
+/* Prima .section era position:fixed, incastrata a destra della sidebar
+   da 270px, con lo scroll tutto suo (overflow-y:auto) — un pannello
+   dentro la pagina, non la pagina stessa. Sparita la sidebar, la sezione
+   scorre nel flusso normale del documento sotto l'header sticky. */
 .section {
   background-color: var(--color-canvas);
   min-height: 100vh;
-  display: block;
   padding: 0 30px;
-  position: fixed;
-  left: 270px;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 0;
-  opacity: 1;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-.section.back-section {
-  z-index: 1;
-}
-.section.active {
-  z-index: 2;
-  opacity: 1;
-  -webkit-animation: slideSection 1s ease;
-  animation: slideSection 1s ease;
-}
-@-webkit-keyframes slideSection {
-  0% {
-    -webkit-transform: translateX(100%);
-    transform: translateX(100%);
-  }
-  100% {
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%);
-  }
-}
-@keyframes slideSection {
-  0% {
-    -webkit-transform: translateX(100%);
-    transform: translateX(100%);
-  }
-  100% {
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%);
-  }
 }
 .section .container {
   padding-top: 60px;
@@ -136,9 +111,6 @@ select {
   padding-left: 15px;
   padding-right: 15px;
 }
-.main-content {
-  padding-left: 270px;
-}
 .container {
   max-width: 1100px;
   width: 100%;
@@ -166,10 +138,6 @@ select {
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
 }
-.hidden {
-  display: none !important;
-}
-
 /* Preloader */
 .preloader {
   background-color: #222222;
@@ -220,143 +188,6 @@ select {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
-}
-
-/* Aside bar Style
-================================================================ */
-.aside {
-  width: 270px;
-  background-color: var(--color-surface);
-  position: fixed;
-  height: 100%;
-  left: 0;
-  top: 0;
-  z-index: 11;
-  border-right: 1px solid var(--color-line);
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-.aside .aside-inner {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  padding: 30px;
-  overflow-y: auto;
-}
-.aside .logo {
-  padding: 30px 0;
-}
-.aside .logo a {
-  font-size: 40px;
-  color: var(--color-ink);
-  font-family: var(--font-heading), sans-serif;
-  font-weight: 700;
-  display: inline-block;
-  position: relative;
-  padding: 0 10px;
-  line-height: 50px;
-}
-.aside .logo a::before {
-  content: "";
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.aside .logo a::after {
-  content: "";
-  height: 20px;
-  width: 20px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.aside .nav-toggler {
-  height: 36px;
-  width: 40px;
-  border: 1px solid var(--color-line-strong);
-  cursor: pointer;
-  position: fixed;
-  top: 16px;
-  z-index: 11;
-  border-radius: 8px;
-  background-color: var(--color-surface);
-  /* display: -ms-flexbox;
-    display: flex; */
-  display: none;
-  -ms-flex-align: center;
-  align-items: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-.aside .nav-toggler span {
-  height: 2px;
-  width: 18px;
-  display: inline-block;
-  position: relative;
-}
-.aside .nav-toggler.open span {
-  background-color: transparent;
-}
-.aside .nav-toggler span::before {
-  content: "";
-  height: 2.5px;
-  width: 18px;
-  position: absolute;
-  top: -6px;
-  left: 0;
-}
-.aside .nav-toggler.open span::before {
-  -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
-  top: 0px;
-}
-.aside .nav-toggler span::after {
-  content: "";
-  height: 2.5px;
-  width: 18px;
-  position: absolute;
-  top: 6px;
-  left: 0;
-}
-.aside .nav-toggler.open span::after {
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  top: 0px;
-}
-.aside .nav {
-  list-style: none;
-  margin: 80px 0;
-  padding: 0;
-}
-.aside .nav li {
-  display: block;
-}
-.aside .nav li a {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--color-ink);
-  line-height: 45px;
-  display: block;
-  border-bottom: 1px solid var(--color-line);
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  text-transform: capitalize;
-}
-.aside .nav li a:not(.active):hover {
-  padding-left: 5px;
-}
-.aside .nav li a svg {
-  margin-right: 5px;
-}
-.aside .copyright {
-  font-size: 14px;
-  color: var(--color-ink-subtle);
 }
 
 /* Home Section
@@ -1093,42 +924,6 @@ select {
 /* ---------------  Responsive Css Stared */
 /* ====================================================== */
 
-@media (max-width: 1199px) {
-  .section .container {
-    padding-top: 70px;
-  }
-  .aside .nav-toggler {
-    display: -ms-flexbox;
-    display: flex;
-    left: 30px;
-  }
-  .aside .nav-toggler.open {
-    left: 200px;
-  }
-  .aside {
-    left: -270px;
-  }
-  .aside.open {
-    left: 0px;
-  }
-  .section {
-    left: 0;
-    position: initial;
-  }
-  .section.active {
-    animation: none;
-  }
-  .main-content {
-    padding: 0;
-  }
-  .section.open {
-    left: 270px;
-  }
-  .about .about-content .personal-info .info-item p span {
-    display: block;
-    margin-left: 0;
-  }
-}
 @media (max-width: 991px) {
   .blog .blog-item,
   .portfolio .portfolio-item,
