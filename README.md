@@ -2,6 +2,8 @@
 
 Online on [simoneguarnuccio.vercel.app](https://simoneguarnuccio.vercel.app)
 
+![Portfolio preview](/public/imgs/preview.webp)
+
 ## Description
 
 This repository contains the source code of the portfolio site of Simone Guarnuccio, a frontend developer with experience in React and Next.js. The site is designed to showcase your projects, skills and work experience in a clear and concise manner.

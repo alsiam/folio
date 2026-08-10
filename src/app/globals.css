@@ -189,4 +189,89 @@
     inset: -1.125rem;
     background: var(--color-accent);
   }
+
+  /* Marquee CSS-only dello Stack, migrato da style.css (Tappa 4) col
+     resto della Tappa 7: la pista è duplicata (metà aria-hidden) e scorre
+     traslando del 50%, pausa in hover, si ferma sotto reduced-motion. */
+  .stack-marquee {
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+  }
+
+  .stack-track {
+    display: flex;
+    width: max-content;
+    list-style: none;
+    animation: stack-marquee-scroll 40s linear infinite;
+  }
+
+  .stack-marquee:hover .stack-track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stack-track {
+      animation: none;
+      overflow-x: auto;
+    }
+  }
+
+  .stack-card {
+    flex: 0 0 auto;
+    margin-right: 1.25rem;
+    border-radius: 10px;
+    border: 1px solid var(--color-line);
+    background-color: var(--color-surface);
+    padding: 1.25rem;
+    text-align: center;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .stack-card:hover {
+    border-color: var(--color-line-strong);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .stack-icon {
+    display: block;
+    margin: 0 auto;
+    width: 40px;
+    height: 40px;
+    color: var(--color-ink-subtle);
+    transition: color 0.3s ease;
+  }
+
+  .stack-card:hover .stack-icon {
+    color: var(--color-accent);
+  }
+
+  .stack-card span {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+}
+
+@keyframes stack-marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
 }
